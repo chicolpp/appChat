@@ -10,8 +10,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object(Config)
 
-    # 🚀 MODIFICAÇÃO AQUI: Mudamos de "http://localhost:5173" para "*"
-    # Isso garante que o Flask responda ao React tanto no PC quanto no iPhone via Tailscale
+
     CORS(app, resources={r"/api/*": {"origins": "*"}})
 
     # Inicializa o banco de dados no app
