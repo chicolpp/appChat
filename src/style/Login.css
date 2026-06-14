@@ -1,0 +1,77 @@
+.areaLogin{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0 auto;
+    height: 100%;
+    width: 100%;
+}
+.forms_content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 1.5rem;
+    height: 40%;
+    width: 40%;
+
+    background-color: rgb(73, 81, 92);
+    border-radius: 20px;
+
+}
+
+
+
+.areaInputLogin {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+input {
+    border-radius: 50px ;
+    outline: none;
+    width: 200px;
+    height: 30px;
+}
+
+input::placeholder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+
+button {
+    /* Ative o flex para o align-items e justify-content funcionarem */
+    display: flex; 
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    width: 200px;
+    height: 35px; /* Aumentei um pouco porque 20px fica muito achatado para um botão */
+    border: none;
+    border-radius: 20px;
+    background-color: rgb(25, 87, 173);
+    color: white; /* Cor do texto branca para contrastar com o azul */
+    font-weight: bold;
+    
+    /* CORREÇÃO: Adicionado o 's' depois do .3 */
+    transition: all .3s ease; 
+}
+
+button:hover {
+    /* CORREÇÃO: translateY move para cima de forma sutil sem amassar o botão */
+    transform: translateY(-3px); 
+    box-shadow: 2px 4px 8px rgb(54, 54, 54); /* Sombra mais suave e realista */
+}
+
+button:active {
+    /* CORREÇÃO: Efeito clássico de clique (reduz levemente o tamanho geral para 98%) */
+    transform: scale(0.98); 
+}
