@@ -1,0 +1,100 @@
+/* Container principal que segura tudo na tela */
+.areaLogin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 20px;
+  height: 100vh; /* Ocupa 100% da altura da tela visível */
+  width: 100%;   /* CORRIGIDO: 100% para centralizar e não vazar para os lados */
+  box-sizing: border-box;
+  background-color: #1a1d24; /* Um fundo escuro combinando com o app */
+}
+
+/* O quadrado cinza do formulário */
+.forms_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 40px 30px; /* Espaçamento interno para os elementos respirarem */
+  width: 90%;         /* Em telas pequenas, ocupa 90% da largura disponível */
+  max-width: 360px;   /* Em telas grandes, limita o tamanho para ficar elegante */
+  background-color: rgb(69, 76, 87);
+  border-radius: 20px;
+  box-sizing: border-box;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Sombra suave ao redor do bloco */
+}
+
+/* Título "Login" no topo do quadrado cinza */
+.forms_content h2 {
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  font-family: sans-serif;
+  font-size: 24px;
+}
+
+/* Div que embrulha os dois inputs */
+.areaInputLogin {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%; /* Ocupa a largura total interna do quadrado cinza */
+}
+
+/* Estilização dos campos de texto */
+input {
+  width: 100%; /* Fluido: se adapta ao tamanho do container pai */
+  height: 42px; /* Altura confortável para o toque no celular */
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: #2b303c; /* Fundo escuro sutil para o input */
+  color: #ffffff;
+  padding: 0 20px;
+  outline: none;
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: rgb(25, 87, 173); /* Borda azul acende ao clicar */
+}
+
+input::placeholder {
+  color: #9aa0a6;
+  text-align: left; /* Alinhamento correto para o texto fantasma */
+}
+
+/* Estilização do Botão de Login */
+button {
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+  width: 100%;  /* CORRIGIDO: Ocupa a mesma largura dos inputs, sem virar bolinha */
+  height: 42px; 
+  margin-top: 10px;
+  
+  border: none;
+  border-radius: 50px; /* Combinando com o arredondamento do input */
+  background-color: rgb(25, 87, 173);
+  color: white; 
+  font-weight: bold;
+  font-size: 16px;
+  transition: all .3s ease; 
+  box-sizing: border-box;
+}
+
+button:hover {
+  transform: translateY(-2px); 
+  background-color: rgb(35, 107, 213); /* Clareia levemente no hover */
+  box-shadow: 0 5px 15px rgba(25, 87, 173, 0.4);
+}
+
+button:active {
+  transform: scale(0.98); 
+}
