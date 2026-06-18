@@ -67,6 +67,10 @@ export default function Home(){
                 Chat server
             </button>
 
+            <button onClick={() => {navigate('/DadosPessoais')}}>
+                Todos Dados
+            </button>
+
             <button onClick={() => {setSair(true)}}>
                 Sair
             </button>

@@ -9,7 +9,7 @@ db = SQLAlchemy()
 
 socketio = SocketIO(
     cors_allowed_origins="*", 
-    async_mode='gevent',
+    async_mode='threading',  
     ping_timeout=60,
     ping_interval=25,
     logger=True, 
@@ -32,11 +32,23 @@ def create_app():
         except Exception as e:
             print("Aviso na checagem do banco:", str(e))
 
-    import app.routes.rotasAutenticacao as rotas
-    if hasattr(rotas, 'auth_bp'):
-        app.register_blueprint(rotas.auth_bp, url_prefix='/usuarios')
-    elif hasattr(rotas, 'usuarios_bp'):
-        app.register_blueprint(rotas.usuarios_bp, url_prefix='/usuarios')
+    # 1. Registra as rotas de Autenticação / Usuários
+    import app.routes.rotasAutenticacao as rotas_auth
+    if hasattr(rotas_auth, 'auth_bp'):
+        app.register_blueprint(rotas_auth.auth_bp, url_prefix='/usuarios')
+    elif hasattr(rotas_auth, 'usuarios_bp'):
+        app.register_blueprint(rotas_auth.usuarios_bp, url_prefix='/usuarios')
+
+    # 2. Registra as rotas de Transação (Ajuste o nome do arquivo se não for rotasTransacao)
+    try:
+        import app.routes.rotasTransacao as rotas_transacao
+        if hasattr(rotas_transacao, 'transacao_bp'):
+            app.register_blueprint(rotas_transacao.transacao_bp, url_prefix='/transacao')
+            print("✅ Blueprint 'transacao_bp' registrado com sucesso.")
+    except ModuleNotFoundError:
+        print("⚠️ Erro: Arquivo 'app.routes.rotasTransacao' não foi encontrado.")
+    except Exception as e:
+        print(f"⚠️ Erro ao carregar rotas de transação: {e}")
 
     return app
 
@@ -85,7 +97,6 @@ def handle_pedir_historico():
     except Exception as e:
         print("Erro interno ao ler histórico via socket:", str(e))
 
-# 🛠️ NOVO EVENTO: Deleta todas as mensagens da tabela e dispara o comando de limpeza geral
 @socketio.on('limpar_historico')
 def handle_limpar_historico():
     try:
@@ -93,12 +104,10 @@ def handle_limpar_historico():
         from flask import current_app
         
         with current_app.app_context():
-            # Executa o comando DELETE em todas as linhas da tabela mensagens_chat
             db.session.query(MensagemChat).delete()
             db.session.commit()
             print("🗑️ Banco de dados limpo por solicitação do usuário.")
             
-        # Avisa TODOS os computadores conectados para zerarem o array de mensagens na tela
         emit('historico_limpo', broadcast=True)
     except Exception as e:
         if 'db' in globals() and db.session:
