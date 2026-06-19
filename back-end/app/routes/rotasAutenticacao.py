@@ -87,3 +87,4 @@ def Login():
         db.session.rollback()
         print("ERRO INTERNO NO LOGIN DO FLASK:", str(e))
         return jsonify({'status': 'erro', 'mensagem': str(e)}), 500
+
